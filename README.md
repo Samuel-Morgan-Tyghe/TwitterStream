@@ -1,9 +1,11 @@
 
 To install and run use the following commands
 1. npm i
-2. npx json-server --watch db.json
-2. node src/twitterStream.js
-4. npm run start
+2. npx json-server --watch db.json 
+3. start new terminal
+4. node src/twitterStream.js 
+5. input twitter credentials
+6. npm run start 
 
 
 Limitations:
