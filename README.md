@@ -1,70 +1,63 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+To install and run use the following commands
+1. npm i
+2. npx json-server --watch db.json
+2. node src/twitterStream.js
+4. npm run start
 
-## Available Scripts
 
-In the project directory, you can run:
+Limitations:
+I presumed 'Twitter V2 API for Node.js' would be straightforward to impliement but like it and others theres limitations 
+- Cors policy
+- i struggled to refactor the code into react as the above happened through localhost aswell as type errors from the backend ( url-1 is not a constructor)
+something to do with how you factor promises and await  and how its asyncorous iteration.
 
-### `yarn start`
+typescript ? 🤔
+Yesterday I started with Typescript and soon when problem solving objects that were nested in arrays nested in objects and typecasting with axios got too much .
+Plus NPM started having tree dependacy issues, permission issues , global prefix was incorrect , trying to troubleshoot again 🙃. 
+so is scrapped typescript and started fresh project today.( also trying to show off with incorporating parcel.js and graphql 🤦🏻‍♂️ )
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Project Overview
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+You have the twitterStream.js file :
 
-### `yarn test`
+- credentials entered through command line
+- place data into array
+- post (axios) to mock rest server ( using json-server)\
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+This project would have taken half the time if i could figure out how to programatically call tweet array and pass it through traditional parent/child components with props.
 
-### `yarn build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+how to process and display data :
 
-### `yarn eject`
+- bulk / batches ( how much will you need?)
+- continuous ( this a huge waste of memory and render performance) 
+- continuous/batch but like an automated tap turning off and on to reduce speed ( theres a .close(), but not an .open() so there library limitations here )
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+This stream loads alot of information so you can as i did create batches ( limits memory use)
+tradeoff is that you then have to have a method to fitler/limit tweets and might end up being wasteful
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+display new bactch when reaching the bottom of page 
+this can be optimised by smaller batches
+or even singularily.
+I think this would cause alot of jankness  (page position moves when its extended) 
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+This loading when reaching the bottom can be optimised by rendereing when the scroll position is at 80% ish (like facebook) and keep the scren locked to the last anchor link
 
-## Learn More
+alternatively :
+the screen doesnt move but scolling triggeres the next tweet in array to become visible and the last to become hidden . 
+kinda like a slot machine
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+alt-alt:
+css can make smooth transitions of data by translate ( with opacity) moving in and out of screen from scroll position
 
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Organisation: 
+to-do
+- remove all boilerplate
+- replace twitterStream.js with a proper singular function components 
+- command line is fun but i wanted to use text input for the credentials ( alternative is .env)
+- make Strings - Strings with regex 
+- reusable parts like twitterStream.js , seperating Axios calls, tweetList manipulation seperate, parent child components passing props 
